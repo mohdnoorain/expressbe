@@ -19,7 +19,7 @@ mongoose.connect(dbUrl)
 
 app.use("/", appRoutes);
 
-const port = process.env.SERVER_PORT || 8200;
+const port = Number(process.env.SERVER_PORT || 8200);
 app.listen(port, () => {
     console.log('server runnig at', port);
 })

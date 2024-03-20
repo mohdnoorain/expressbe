@@ -5,8 +5,11 @@ import authGuard from './helpers/authGuard.helper';
 
 const appRoutes = express.Router()
 
+
 appRoutes.use("/api/v1/auth", authRoutes);
 
 appRoutes.use("/api/v1/user", authGuard, userRoutes)
+
+appRoutes.use("/", (req, res) => { res.end("Hello there you got it right :)") });
 
 export { appRoutes }
