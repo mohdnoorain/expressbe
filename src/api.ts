@@ -1,7 +1,9 @@
 import express, { Request, Response } from 'express';
 import dotenv from "dotenv";
 import mongoose from 'mongoose';
-import { appRoutes } from './app.routes';
+import { appRoutes } from './routes/app.routes';
+
+const serverless = require('serverless-http');
 
 dotenv.config({ path: "local.env" });
 
@@ -17,9 +19,13 @@ mongoose.connect(dbUrl)
         console.log(`db connection failed 🤨.`, err);
     })
 
-app.use("/", appRoutes);
+// app.use("/api/v1", appRoutes);
 
-const port = Number(process.env.SERVER_PORT || 8200);
-app.listen(port, () => {
-    console.log('server runnig at', port);
-})
+app.use('/api/v1', appRoutes);
+
+// app.use('/.netlify/functions/api', appRoutes);
+module.exports.handler = serverless(app);
+// const port = Number(process.env.SERVER_PORT || 8200);
+// app.listen(port, () => {
+//     console.log('server runnig at', port);
+// })
