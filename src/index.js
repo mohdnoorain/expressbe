@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require("dotenv");
 const mongoose = require('mongoose');
+const userModal = require('./models/user.model');
 // const appRoutes = require('./routes/app.routes.js');
 
 dotenv.config({ path: "local.env" });
@@ -19,6 +20,10 @@ mongoose.connect(dbUrl)
 
 app.get('/', (req, res) => { res.send("Hlo ther !") })
 app.get('/hi', (req, res) => { res.send("Hii user  ther !") })
+app.get('/get', async (req, res) => {
+    const resd = await userModal.find({ fullName: 'user1' })
+    res.send(resd)
+})
 // app.use('/api/v1', appRoutes);
 
 const port = Number(process.env.SERVER_PORT || 8200);
