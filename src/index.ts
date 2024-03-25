@@ -19,13 +19,10 @@ mongoose.connect(dbUrl)
         console.log(`db connection failed 🤨.`, err);
     })
 
-// app.use("/api/v1", appRoutes);
 
 app.use('/api/v1', appRoutes);
 
-// app.use('/.netlify/functions/api', appRoutes);
-module.exports.handler = serverless(app);
-// const port = Number(process.env.SERVER_PORT || 8200);
-// app.listen(port, () => {
-//     console.log('server runnig at', port);
-// })
+const port = Number(process.env.SERVER_PORT || 8200);
+app.listen(port, () => {
+    console.log('server runnig at', port);
+})
