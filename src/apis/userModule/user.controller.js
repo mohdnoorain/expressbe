@@ -1,12 +1,9 @@
-import { NextFunction, Request, Response } from "express";
-import { object, string } from "yup";
 import { ResMessage, ResStatus } from "../../constants/server.constants";
-import { UserInterface, userModal } from "../../models/user.model";
-import { userSettingsModal } from "../../models/userSettings.model";
+
 class userController {
     constructor() { }
 
-    async getSettings(req: Request, res: Response, next: NextFunction) {
+    async getSettings(req, res, next) {
         try {
 
             const { _id } = req.body;
@@ -18,7 +15,7 @@ class userController {
 
             next();
 
-        } catch (error: any) {
+        } catch (error) {
             const { errors } = error;
             if (errors) {
                 res.status(ResStatus.success).json({

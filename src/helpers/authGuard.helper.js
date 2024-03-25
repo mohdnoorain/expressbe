@@ -1,16 +1,14 @@
-import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken"
 import { ResMessage, ResStatus } from "../constants/server.constants";
-import { ResInterface } from "../interfaces/common.interfaces";
 
-const authGuard = (req: Request, res: Response, next: NextFunction) => {
+const authGuard = (req, res, next) => {
     const authorization = req.headers.authorization
     try {
-        const payload: any = jwt.verify(authorization?.replace("Bearer", "").trim() ?? "", process.env.JWT_SECRET ?? "");
+        const payload = jwt.verify(authorization?.replace("Bearer", "").trim() ?? "", process.env.JWT_SECRET ?? "");
         req.body._id = payload?.data?._id
         next();
-    } catch (error: any) {
-        const resData: ResInterface = {
+    } catch (error) {
+        const resData = {
             message: ResMessage.unauthorizedErr,
             body: error
         }

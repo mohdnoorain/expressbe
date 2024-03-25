@@ -1,11 +1,5 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-interface UserSettingsInterface {
-    fullName: string
-    username: string
-    email: string
-    password: string
-}
 const userSettingsSchema = new mongoose.Schema({
     userId: {
         type: String,
@@ -18,4 +12,4 @@ const userSettingsSchema = new mongoose.Schema({
 });
 
 const userSettingsModal = mongoose.model('userSettings', userSettingsSchema)
-export { userSettingsModal, userSettingsSchema, UserSettingsInterface }
+module.exports = { userSettingsModal, userSettingsSchema }

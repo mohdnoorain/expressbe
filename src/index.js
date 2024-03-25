@@ -1,7 +1,7 @@
-import express, { Request, Response } from 'express';
-import dotenv from "dotenv";
-import mongoose from 'mongoose';
-import { appRoutes } from './routes/app.routes';
+const express = require('express');
+const dotenv = require("dotenv");
+const mongoose = require('mongoose');
+// const appRoutes = require('./routes/app.routes.js');
 
 dotenv.config({ path: "local.env" });
 
@@ -18,7 +18,8 @@ mongoose.connect(dbUrl)
     })
 
 app.get('/', (req, res) => { res.send("Hlo ther !") })
-app.use('/api/v1', appRoutes);
+app.get('/hi', (req, res) => { res.send("Hii user  ther !") })
+// app.use('/api/v1', appRoutes);
 
 const port = Number(process.env.SERVER_PORT || 8200);
 app.listen(port, () => {

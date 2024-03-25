@@ -1,15 +1,14 @@
-import { Request, Response } from "express";
-import { UserInterface, userModal } from "../../models/user.model";
-import { ResMessage, ResStatus } from "../../constants/server.constants";
-import { userSettingsModal } from "../../models/userSettings.model";
+const userModal = require("../../models/user.model");
+const { ResMessage, ResStatus } = require("../../constants/server.constants");
+const userSettingsModal = require("../../models/userSettings.model");
 
 class authService {
     constructor() { }
 
-    async signUp(req: Request, res: Response) {
+    async signUp(req, res) {
         try {
 
-            const { username, fullName, email, password }: UserInterface = req.body;
+            const { username, fullName, email, password } = req.body;
 
             const result = new userModal({
                 username, fullName, email, password
@@ -35,4 +34,4 @@ class authService {
     }
 }
 
-export default new authService()
+module.exports = new authService()

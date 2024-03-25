@@ -30,4 +30,4 @@ class ResStatus {
     static serviceUnavailable = 503;
 }
 
-export { ResMessage, ResStatus }
+module.exports = { ResMessage, ResStatus }

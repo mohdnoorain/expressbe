@@ -1,15 +1,15 @@
-import { NextFunction, Request, Response } from "express";
-import { object, string } from "yup";
-import { ResMessage, ResStatus } from "../../constants/server.constants";
-import { UserInterface, userModal } from "../../models/user.model";
-import jwt from "jsonwebtoken"
-import { ResInterface } from "../../interfaces/common.interfaces";
+const string = require("yup");
+const object = require("yup");
+const { ResMessage, ResStatus } = require("../../constants/server.constants");
+const userModal = require("../../models/user.model");
+const jwt = require("jsonwebtoken");
+
 class authController {
     constructor() { }
 
-    async signUp(req: Request, res: Response, next: NextFunction) {
+    async signUp(req, res, next) {
         try {
-            const { fullName, username, email, password }: UserInterface = req.body;
+            const { fullName, username, email, password } = req.body;
 
             const userValidations = object({
                 fullName: string().required("Full name is required.").min(4, "Full name must have atleast 3 characters."),
@@ -40,7 +40,7 @@ class authController {
 
             next();
 
-        } catch (error: any) {
+        } catch (error) {
             const { errors } = error;
             if (errors) {
                 res.status(ResStatus.success).json({
@@ -56,9 +56,9 @@ class authController {
         }
     }
 
-    async signIn(req: Request, res: Response) {
+    async signIn(req, res) {
         try {
-            const { email, password }: UserInterface = req.body;
+            const { email, password } = req.body;
 
             const userValidations = object({
                 email: string().required("Email is required.").email("Invalid email."),
@@ -79,13 +79,13 @@ class authController {
             user.password = "*****";
             const secret = process.env.JWT_SECRET || 'secret';
             const token = jwt.sign({ data: user }, secret, { expiresIn: '1d' });
-            const resData: ResInterface = {
+            const resData = {
                 message: "Sign in successfully.",
                 body: { user, token }
             }
             res.status(ResStatus.success).json(resData);
 
-        } catch (error: any) {
+        } catch (error) {
             const { errors } = error;
             if (errors) {
                 res.status(ResStatus.success).json({
@@ -102,4 +102,4 @@ class authController {
     }
 }
 
-export default new authController()
+module.exports = new authController()

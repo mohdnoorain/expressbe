@@ -1,12 +1,11 @@
-import { Request, Response } from "express";
-import { UserInterface, userModal } from "../../models/user.model";
+
 import { ResMessage, ResStatus } from "../../constants/server.constants";
 import { userSettingsModal } from "../../models/userSettings.model";
 
 class userService {
     constructor() { }
 
-    async getSettings(req: Request, res: Response) {
+    async getSettings(req, res) {
         try {
 
             const { _id } = req.body;

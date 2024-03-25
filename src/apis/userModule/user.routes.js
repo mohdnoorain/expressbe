@@ -8,4 +8,4 @@ userRoutes.get('/settings', userController.getSettings, userService.getSettings)
 
 // userRoutes.post('/sign-in', userController.signIn);
 
-export { userRoutes }
+module.exports = userRoutes 
