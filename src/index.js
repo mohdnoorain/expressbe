@@ -19,7 +19,7 @@ mongoose.connect(dbUrl)
     })
 
 app.get('/', (req, res) => { res.send("Hlo ther !") })
-app.get('/hi', (req, res) => { res.send("Hii user  ther !") })
+app.get('/hi', (req, res) => { res.send("Hii :)") })
 app.get('/get', async (req, res) => {
     const resd = await userModal.find({ fullName: 'user1' })
     res.send(resd)
