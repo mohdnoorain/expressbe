@@ -9,6 +9,6 @@ appRoutes.use("/auth", authRoutes);
 
 appRoutes.use("/user", authGuard, userRoutes)
 
-appRoutes.use("/*", (req, res) => { res.end("Looks like you lost") })
+// appRoutes.use("/*", (req, res) => { res.end("Looks like you lost") })
 
 export { appRoutes }

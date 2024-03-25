@@ -3,8 +3,6 @@ import dotenv from "dotenv";
 import mongoose from 'mongoose';
 import { appRoutes } from './routes/app.routes';
 
-const serverless = require('serverless-http');
-
 dotenv.config({ path: "local.env" });
 
 const app = express();
@@ -19,10 +17,10 @@ mongoose.connect(dbUrl)
         console.log(`db connection failed 🤨.`, err);
     })
 
-
+app.get('/', (req, res) => { res.send("Hlo ther !") })
 app.use('/api/v1', appRoutes);
 
 const port = Number(process.env.SERVER_PORT || 8200);
 app.listen(port, () => {
-    console.log('server runnig at', port);
+    console.log(`server runnig atd http://localhost:${port}`);
 })
